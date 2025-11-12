@@ -1,0 +1,18 @@
+.app_main {
+  display: flex; /* 1D layout */
+  flex-direction: column; /* elements arranged in a column */
+  align-items: center; /* centered horizontally within the column */
+  gap: 16px; /* between items of the flexbox */
+  margin-top: 16px;
+}
+
+.panel {
+  background: var(--panel);
+  border-radius: 12px; /* rounding */
+  padding: 10px 16px; /* between border and content */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  width: fit-content; /* shrink to content width (board/controls) */
+}
+.panel_title {
+  margin: 0 0 12px 0; /* remove top margin, small bottom gap */
+}

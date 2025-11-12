@@ -1,0 +1,19 @@
+.controls__moves {
+  display: flex;
+  gap: 6px;
+}
+
+.controls__moves .btn {
+  background: #8f7a66;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.controls__moves .btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

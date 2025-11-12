@@ -1,0 +1,4 @@
+.tile-sprite {
+  position: absolute;
+  will-change: transform;
+}

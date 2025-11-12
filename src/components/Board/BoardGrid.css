@@ -1,0 +1,4 @@
+.board-slot {
+  background: var(--tile-empty);
+  border-radius: 8px;
+}

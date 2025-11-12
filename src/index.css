@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box; /* width = content + padding + border */
+}
+
+html[theme="light"] {
+  /* dark mode exclusive settings */
+  --bg: #faf8ef; /* page background */
+  --panel: #ffffff; /* background for panels/buttons/etc. */
+  --text: #2f2f2f; /* general text color for labels/titles/etc. */
+  --tile-empty: #cdc1b4; /* color of empty slots */
+}
+
+html[theme="dark"] {
+  /* light mode exclusive settings */
+  --bg: #1b1c1e; /* page background */
+  --panel: #232528; /* background for panels/buttons/etc */
+  --text: #e6e6e6; /* general text color for labels/titles/etc. */
+  --tile-empty: #3a3c40; /* color of empty slots */
+}
+
+body {
+  /* base style */
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji",
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

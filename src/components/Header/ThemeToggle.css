@@ -1,0 +1,11 @@
+.theme-toggle {
+  background: #8f7a66;
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 110px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 1;
+}

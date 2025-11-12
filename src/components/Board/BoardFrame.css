@@ -1,0 +1,6 @@
+.board-frame {
+  position: relative;
+  background: #bbada0;
+  padding: 10px;
+  border-radius: 12px;
+}

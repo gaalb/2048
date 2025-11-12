@@ -1,0 +1,8 @@
+.overlay__title {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+
+.overlay__score {
+  opacity: 0.85;
+}
