@@ -1,5 +1,8 @@
 import { useMemo, useState, useEffect } from "preact/hooks";
 
+const slideUrl = `${import.meta.env.BASE_URL}sounds/slide.mp3`;
+const popUrl = `${import.meta.env.BASE_URL}sounds/pop.mp3`;
+
 const STORAGE_KEY = "sfxMuted"; // key in localStorage
 
 export default function useSfx() {
@@ -25,14 +28,14 @@ export default function useSfx() {
 
   // persistent object encapsulating the move sound effect
   const move = useMemo(() => {
-    const a = new Audio("/sounds/slide.mp3");
+    const a = new Audio(slideUrl);
     a.volume = 0.55;
     return a;
   }, []);
 
   //persistent object encapsulating the merge sound effect
   const merge = useMemo(() => {
-    const a = new Audio("/sounds/pop.mp3");
+    const a = new Audio(popUrl);
     a.volume = 0.25;
     return a;
   }, []);
