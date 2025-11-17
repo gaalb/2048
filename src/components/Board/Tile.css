@@ -46,22 +46,22 @@
   font-size: 1.1rem;
 }
 .tile--v512 {
-  background: #a9ed50;
+  background: #50ed65;
   color: #f9f6f2;
   font-size: 1.1rem;
 }
 .tile--v1024 {
-  background: #3fed6a;
+  background: #3fe1ed;
   color: #f9f6f2;
   font-size: 1rem;
 }
 .tile--v2048 {
-  background: #2ee7ed;
+  background: #2e91ed;
   color: #f9f6f2;
   font-size: 1rem;
 }
 .tile--v4096 {
-  background: #2e7eed;
+  background: #572eed;
   color: #f9f6f2;
   font-size: 1rem;
 }
