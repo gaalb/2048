@@ -25,6 +25,13 @@ const HS_KEY = "highScore"; // local storage key for hs
 const ANIM_MS = 150; // slide duration in ms
 const default_size = 4;
 
+/**
+ * Root application component for 2048 game.
+ * Handles theme and SFX settings, game state, persistence, and passes
+ * all relevant props down to header, board, and control components.
+ *
+ * @returns The main app layout containing header, board, and controls.
+ */
 export default function App() {
   // custom hook for toggling the theme, handles local storage and html attribute setting
   const { theme, toggle } = useTheme();
@@ -78,7 +85,13 @@ export default function App() {
     }
   }, [score, highScore]);
 
-  // handler for changing board size
+  /**
+   * Handler for changing the logical board size.
+   * Clamps the new size to the allowed range, resets the game
+   * state, and clears undo and animation state.
+   *
+   * @param newSize - Requested new board size.
+   */
   const onSizeChange = (newSize: number) => {
     // board size forced between 3 and 6
     const clamped = Math.min(Math.max(newSize, 3), 6);
@@ -90,7 +103,10 @@ export default function App() {
     setAnimMoves(undefined); // clear animations
   };
 
-  // handler for starting a new game
+  /**
+   * Handler for starting a brand new game on the current board size.
+   * Clears any saved game state, undo state, and animation-related flags.
+   */
   const onNewGame = () => {
     clearSavedGame(); // clear saved game state
     setBoard(seedBoard(size)); // new seeded board of current size
@@ -100,6 +116,10 @@ export default function App() {
     setAnimMoves(undefined); // clear animations
   };
 
+  /**
+   * Handler for undoing the last valid move.
+   * Restores the previous board if available and clears undo state.
+   */
   const onUndo = () => {
     // no animation for undo
     if (!prevBoard) return;
@@ -110,6 +130,17 @@ export default function App() {
     setAnimMoves(undefined); // clear animations
   };
 
+  /**
+   * Executes a move in the given direction:
+   * - Validates the move (no effect if no tiles move or game is over / animating).
+   * - Plays sound effects.
+   * - Triggers tile movement animation.
+   * - After animation, spawns a new tile and checks for game over.
+   *
+   * Wrapped in useCallback so that it changes only when its dependencies do.
+   *
+   * @param dir - Direction of the attempted move.
+   */
   // useCallback to memoize the function and re-bind it only when dependencies change
   const performMove = useCallback(
     (dir: Direction) => {
