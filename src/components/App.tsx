@@ -83,10 +83,6 @@ export default function App() {
     // board size forced between 3 and 6
     const clamped = Math.min(Math.max(newSize, 3), 6);
     setSize(clamped);
-    // persist size change
-    try {
-      localStorage.setItem("boardSize", String(clamped));
-    } catch {}
     setBoard(seedBoard(clamped)); // make a new game with the new size
     setPrevBoard(null); // clear undo history
     setGameOver(false); // clear game over state

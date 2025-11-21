@@ -6,6 +6,12 @@ import BoardGrid from "./BoardGrid";
 import TileLayer from "./TileLayer";
 import TileSprite from "./TileSprite";
 
+/**
+ * Props for the GameBoard component.
+ * @property board - Current board state as a 2D array of tile values.
+ * @property animMoves - Optional list of tile movements used for animation.
+ * @property animMs - Optional animation duration in milliseconds.
+ */
 type GameBoardProps = {
   board: Board;
   animMoves?: MoveAnim[];
@@ -16,6 +22,16 @@ const BOARD_PX = 340; // total board pixel size
 const PAD = 10; // padding inside board
 const GAP = 10; // gap between cells
 
+/**
+ * Renders the visual game board with tiles and movement animations.
+ * Uses a fixed-size frame and computes tile positions and translation
+ * offsets from the board state and animation data.
+ *
+ * @param props.board - The current board matrix.
+ * @param props.animMoves - Optional list of tile moves to animate.
+ * @param props.animMs - Duration of the tile movement animation in ms.
+ * @returns The rendered game board with tiles.
+ */
 const GameBoard: FunctionalComponent<GameBoardProps> = ({
   board,
   animMoves,
@@ -26,7 +42,7 @@ const GameBoard: FunctionalComponent<GameBoardProps> = ({
   const cellLeft = (col: number) => PAD + col * (cellPx + GAP); // cell left position
   const cellTop = (row: number) => PAD + row * (cellPx + GAP); // cell top position
 
-  // Used to find where each tile is moving to
+  // Map from a tile's original position to its target position (for animation)
   const animIndex = new Map<string, { toRow: number; toCol: number }>();
   if (animMoves) {
     for (const m of animMoves) {
@@ -56,8 +72,8 @@ const GameBoard: FunctionalComponent<GameBoardProps> = ({
       const to = animIndex.get(`${r},${c}`); // check if this tile is moving
       const tr = to ? to.toRow : r; // target row
       const tc = to ? to.toCol : c; // target column
-      const dx = (tc - c) * (cellPx + GAP);
-      const dy = (tr - r) * (cellPx + GAP);
+      const dx = (tc - c) * (cellPx + GAP); // horizontal offset for animation
+      const dy = (tr - r) * (cellPx + GAP); // vertical offset for animation
       // add sprite with position and movement delta
       sprites.push({ key: `${r}-${c}-${v}`, row: r, col: c, value: v, dx, dy });
     }
