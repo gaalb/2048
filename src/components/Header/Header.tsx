@@ -4,6 +4,15 @@ import ThemeToggle from "./ThemeToggle";
 import SfxToggle from "./SfxToggle";
 import "./Header.css";
 
+/**
+ * Props for the Header component.
+ * @property score - Current score of the game.
+ * @property highScore - Highest score achieved (from localStorage).
+ * @property theme - Current UI theme ("light" or "dark").
+ * @property onToggleTheme - Callback to switch between light/dark theme.
+ * @property sfxMuted - Whether sound effects are muted.
+ * @property onToggleSfx - Callback to toggle sound effects on/off.
+ */
 type Props = {
   score: number;
   highScore: number;
@@ -13,6 +22,18 @@ type Props = {
   onToggleSfx: () => void;
 };
 
+/**
+ * Renders the top header section of the game UI.
+ * Displays current score, high score, and provides theme and sound toggles.
+ *
+ * @param props.score - Live game score.
+ * @param props.highScore - Persisted highest score.
+ * @param props.theme - Current display theme.
+ * @param props.onToggleTheme - Handler for switching theme.
+ * @param props.sfxMuted - Whether sound effects are muted.
+ * @param props.onToggleSfx - Handler for toggling sound effects.
+ * @returns JSX header element with badges and toggle buttons.
+ */
 const Header: FunctionalComponent<Props> = ({
   score,
   highScore,
