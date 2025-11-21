@@ -8,10 +8,10 @@
 .panel {
   background: var(--panel);
   border-radius: 12px; /* rounding */
-  padding: 10px 16px; /* between border and content */
+  padding: 6px 16px; /* between border and content */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   width: fit-content; /* shrink to content width (board/controls) */
 }
 .panel_title {
-  margin: 0 0 12px 0; /* remove top margin, small bottom gap */
+  margin: 0 0 6px 0; /* remove top margin, small bottom gap */
 }
