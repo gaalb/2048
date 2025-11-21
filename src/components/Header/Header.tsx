@@ -22,10 +22,14 @@ const Header: FunctionalComponent<Props> = ({
   onToggleSfx,
 }) => (
   <header class="header">
-    <Badge>Score: {score}</Badge>
-    <Badge>High Score: {highScore}</Badge>
-    <ThemeToggle theme={theme} onToggle={onToggleTheme} />
-    <SfxToggle muted={sfxMuted} onToggle={onToggleSfx} />
+    <div class="header_scores">
+      <Badge>Score: {score}</Badge>
+      <Badge>High Score: {highScore}</Badge>
+    </div>
+    <div class="header_toggles">
+      <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+      <SfxToggle muted={sfxMuted} onToggle={onToggleSfx} />
+    </div>
   </header>
 );
 

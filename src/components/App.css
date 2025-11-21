@@ -3,7 +3,6 @@
   flex-direction: column; /* elements arranged in a column */
   align-items: center; /* centered horizontally within the column */
   gap: 16px; /* between items of the flexbox */
-  margin-top: 16px;
 }
 
 .panel {

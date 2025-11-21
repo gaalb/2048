@@ -1,9 +1,18 @@
 .header {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
-  justify-content: center;
-  margin-top: 20px;
+  margin: 10px 0px 6px 0px;
+}
+
+.header_scores {
+  display: flex;
+  gap: 12px;
+}
+
+.header_toggles {
+  display: flex;
+  gap: 8px;
 }
 
 .header * {
