@@ -21,8 +21,11 @@ const Controls: FunctionalComponent<Props> = ({
   gameOver = false,
 }) => (
   <div class="controls">
-    <NewGameButton onClick={onNewGame} />
-    <UndoButton onClick={onUndo} disabled={undoDisabled} />
+    <div class="controls__row-top">
+      <h2 class="panel_title controls__title">Controls</h2>
+      <NewGameButton onClick={onNewGame} />
+      <UndoButton onClick={onUndo} disabled={undoDisabled} />
+    </div>
     <MoveButtons onMove={onMove} disabled={gameOver} />
   </div>
 );

@@ -1,5 +1,17 @@
 .controls {
   display: flex;
+  flex-direction: column; /* rows stacked vertically */
   gap: 8px;
-  flex-wrap: wrap;
+}
+
+/* First row: title + New Game + Undo */
+.controls__row-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap; /* allow wrap on small screens */
+}
+
+.controls__title {
+  margin: 0; /* remove default h2 margin */
 }

@@ -198,7 +198,6 @@ export default function App() {
           score={score}
         />
         <section class="panel">
-          <h2 class="panel_title">Controls</h2>
           <Controls // game control buttons
             onNewGame={onNewGame}
             onUndo={onUndo}
