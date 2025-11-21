@@ -20,6 +20,7 @@ import {
   saveGameState,
   clearSavedGame,
 } from "../utils/board";
+import useSwipe from "../hooks/useSwipe";
 
 const HS_KEY = "highScore"; // local storage key for hs
 const ANIM_MS = 150; // slide duration in ms
@@ -176,6 +177,12 @@ export default function App() {
       saveGameState(board, prevBoard);
     }
   }, [board, prevBoard, gameOver]);
+
+  const isCoarse =
+    typeof window !== "undefined" &&
+    window.matchMedia?.("(pointer: coarse)")?.matches;
+
+  useSwipe((dir) => performMove(dir), 24, isCoarse);
 
   return (
     <div class="app">
