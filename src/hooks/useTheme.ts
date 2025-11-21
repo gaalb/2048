@@ -1,6 +1,16 @@
 import { useEffect, useState } from "preact/hooks";
 
 const STORAGE_KEY = "theme"; // key in localStorage
+
+/**
+ * Custom hook for managing application theme ("light" or "dark").
+ * Features:
+ * - Reads saved theme from localStorage, or falls back to system preference
+ * - Applies selected theme to <html> attribute
+ * - Persists theme changes in localStorage
+ *
+ * @returns Object with current theme and function to toggle it
+ */
 export default function useTheme() {
   const hasWindow = typeof window !== "undefined";
   // check whether the browser has a preference for light vs dark mode
@@ -13,7 +23,11 @@ export default function useTheme() {
     );
   })();
 
-  // variable for what theme is set currently, and its setter
+  /**
+   * Current theme state, initialized from:
+   * - localStorage if available
+   * - else from system preference
+   */
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     // lazy initializer
     const saved = hasWindow ? localStorage.getItem(STORAGE_KEY) : null; // already have a preference saved
