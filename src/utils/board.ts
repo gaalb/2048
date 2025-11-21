@@ -1,11 +1,25 @@
+/**
+ * 2D board representation where each cell holds a tile value (0 = empty).
+ */
 export type Board = number[][];
+
+/**
+ * Possible movement directions for a game step.
+ */
 export type Direction = "up" | "down" | "left" | "right";
+
+/**
+ * Single tile movement/merge animation description.
+ */
 export type MoveAnim = {
   from: { row: number; col: number };
   to: { row: number; col: number };
   value: number;
 };
 
+/**
+ * Mapping from keyboard event keys to logical move directions.
+ */
 export const dirMap: Record<string, Direction> = {
   ArrowUp: "up",
   ArrowDown: "down",
@@ -20,6 +34,12 @@ function createEmptyBoard(size: number): Board {
   );
 }
 
+/**
+ * Creates a deep copy of the given board so the original is not mutated.
+ *
+ * @param board - Board to clone.
+ * @returns A new board with the same values.
+ */
 export function cloneBoard(board: Board): Board {
   return board.map((row) => row.slice());
 }
@@ -43,7 +63,13 @@ function randomTileValue(): number {
   return Math.random() < 0.6 ? 2 : 4;
 }
 
-// place a random tile (2 or 4) in a random empty cell
+/**
+ * Place a random tile (2 or 4) into a random empty cell on the board.
+ * Returns a new board instance; does not mutate the input.
+ *
+ * @param board - Current board.
+ * @returns New board with a single random tile placed, or original if full.
+ */
 export function placeRandomTile(board: Board): Board {
   const cells = emptyCells(board);
   if (cells.length === 0) return board; // no empty cells, return board as is
@@ -52,6 +78,13 @@ export function placeRandomTile(board: Board): Board {
   next[row][col] = randomTileValue(); // place random tile
   return next;
 }
+
+/**
+ * Create a new empty board of the given size and place two random tiles.
+ *
+ * @param size - Board side length (NxN).
+ * @returns Newly seeded board.
+ */
 // create an empty board and place two random tiles
 export function seedBoard(size: number): Board {
   let board = createEmptyBoard(size);
@@ -59,11 +92,24 @@ export function seedBoard(size: number): Board {
   board = placeRandomTile(board);
   return board;
 }
+
+/**
+ * Compute the total score of the board as the sum of all tile values.
+ *
+ * @param board - Board whose score to compute.
+ * @returns Sum of all tile values.
+ */
 // compute the score of the board as the sum of all tile values
 export function computeScore(board: Board): number {
   return board.flat().reduce((sum, v) => sum + v, 0);
 }
 
+/**
+ * Check whether the board has at least one empty cell (value 0).
+ *
+ * @param board - Board to inspect.
+ * @returns True if any cell is empty, false otherwise.
+ */
 // check if the board has any empty cell (0 means empty)
 export function hasEmptyCell(board: Board): boolean {
   for (let r = 0; r < board.length; r++) {
@@ -74,6 +120,12 @@ export function hasEmptyCell(board: Board): boolean {
   return false;
 }
 
+/**
+ * Check if any merge is possible on the board (adjacent equal tiles).
+ *
+ * @param board - Board to inspect.
+ * @returns True if a merge move is possible, false otherwise.
+ */
 // check if any merge is possible on the board
 export function canMerge(board: Board): boolean {
   const n = board.length;
@@ -91,6 +143,12 @@ export function canMerge(board: Board): boolean {
   return false;
 }
 
+/**
+ * Check whether any move is possible (either an empty cell or a merge).
+ *
+ * @param board - Board to inspect.
+ * @returns True if at least one valid move exists.
+ */
 // check if any move is possible (either empty cell or merge)
 export function hasMove(board: Board): boolean {
   return hasEmptyCell(board) || canMerge(board);
@@ -119,6 +177,18 @@ function reverseRows(b: Board): Board {
   return b.map((row) => row.slice().reverse());
 }
 
+/**
+ * Perform a move in the given direction on the board.
+ * Uses rotation/reflection so the merge logic only needs to handle "left" moves.
+ *
+ * @param board - Current board state.
+ * @param dir - Direction in which to move tiles.
+ * @returns Object containing:
+ *  - next: the resulting board after the move
+ *  - moves: list of movements for animation
+ *  - moved: whether the board actually changed
+ *  - merged: whether any merge occurred
+ */
 export function move(
   board: Board,
   dir: Direction
@@ -237,6 +307,11 @@ function boardsEqual(a: Board, b: Board): boolean {
   return true;
 }
 
+/**
+ * Fetch saved game state from localStorage, if present and valid.
+ *
+ * @returns An object containing current and previous boards, or null if none.
+ */
 // fetch saved game state from local storage
 export function loadGameState(): {
   board: Board; // current board
@@ -256,6 +331,12 @@ export function loadGameState(): {
   }
 }
 
+/**
+ * Save the current game state (board and previous board) to localStorage.
+ *
+ * @param board - Current board to persist.
+ * @param prevBoard - Previous board (for undo), or null.
+ */
 export function saveGameState(board: Board, prevBoard: Board | null) {
   try {
     const state = { board, prevBoard };
@@ -263,6 +344,9 @@ export function saveGameState(board: Board, prevBoard: Board | null) {
   } catch {}
 }
 
+/**
+ * Clear any persisted game state from localStorage.
+ */
 export function clearSavedGame() {
   try {
     localStorage.removeItem("savedGameState");
